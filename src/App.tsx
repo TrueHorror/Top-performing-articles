@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <div className="page-wrapper">
-      {/*Add header and router for different pages. Only MainPage for now.*/}
+      {/*Could add a header and router for different pages. Only MainPage for now.*/}
       <MainPage />
     </div>
   );

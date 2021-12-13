@@ -1,8 +1,12 @@
 import express from 'express';
 import {articleList, isArticle} from './articles';
 
+
+const cors = require('cors')
 const app = express();
 const PORT = 8080;
+
+app.use(cors());
 
 app.get('/articles', (req, res) => res.json(articleList));
 

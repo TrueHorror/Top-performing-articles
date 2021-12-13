@@ -1,4 +1,4 @@
-import ArticleTable from "../components/ArticleTable"
+import ArticleTable from "../components/Table/ArticleTable"
 import { MainContentWrapper } from "./styles/MainPage.styled";
 
 const MainPage = () => {
@@ -8,5 +8,6 @@ const MainPage = () => {
         </MainContentWrapper>
     );
 }
+
 
 export default MainPage;
