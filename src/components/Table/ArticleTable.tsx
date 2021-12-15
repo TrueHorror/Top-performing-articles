@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Article } from "../../models/Article.model";
 import { Paths } from "../../utils/Endpoints";
-import { TableContainer } from "./styles/ArticleTable.styled";
+import { ArticleTableContainer } from "./styles/ArticleTableContainer.styled";
 import Table, { Column } from "./Table";
+import TableOperations from "./TableOperations/TableOperations";
 
-const ArticleTable = () => {
+const ArticleTable = (props: {displayModal: boolean, setDisplayModal: Dispatch<SetStateAction<boolean>>}) => {
   const [articles, setArticles] = useState<Article[] | null>(null);
 
   useEffect(() => {
@@ -62,10 +63,13 @@ const ArticleTable = () => {
   ];
 
   return (
-    <TableContainer>
-        
-      <Table data={articles} columns={columns} />
-    </TableContainer>
+    <>
+      <ArticleTableContainer>
+          <h2>Articles</h2>
+          <TableOperations displayModal={props.displayModal} setDisplayModal={props.setDisplayModal}/>
+        <Table data={articles} columns={columns} />
+      </ArticleTableContainer>
+    </>
   );
 };
 

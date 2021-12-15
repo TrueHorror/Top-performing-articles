@@ -88,3 +88,4 @@ export const isArticle = (article: any): article is Article  => {
       (<Article>article).ctr !== undefined &&
       Object.entries(article).length === 10
 }
+

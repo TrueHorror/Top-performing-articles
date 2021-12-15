@@ -11,7 +11,7 @@ const TableHeader = <T, K extends keyof T>({
 }: TableHeaderProps<T, K>): JSX.Element => {
   const headers = columns.map((col, index) => {
     return (
-        <th key={`col-${index}`}>
+        <th className="table-cell" key={`col-${index}`}>
             {col.header}
         </th>
 
@@ -20,7 +20,7 @@ const TableHeader = <T, K extends keyof T>({
 
   return (
     <TableHead>
-      <tr>{headers}</tr>
+      <tr className="table-head-row">{headers}</tr>
     </TableHead>
   );
 };

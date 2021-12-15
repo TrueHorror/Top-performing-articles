@@ -1,5 +1,5 @@
 import React from 'react'
-import { Article } from '../../models/Article.model'
+import { TableContainer } from './styles/TableContainer.styled'
 import TableHeader from './TableHeader'
 import TableRows from './TableRows'
 
@@ -16,10 +16,10 @@ type TableProps<Article, K extends keyof Article> = {
 
 const Table = <T, K extends keyof T>({data, columns}: TableProps<T, K>): JSX.Element => {
     return (
-        <table>
+        <TableContainer>
             <TableHeader columns={columns}/>
             <TableRows data={data} columns={columns}/>
-        </table>
+        </TableContainer>
     ) 
 }
 
