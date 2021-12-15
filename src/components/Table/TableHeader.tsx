@@ -1,28 +1,28 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { TableHead } from "./styles/TableHeader.styled";
 import { Column } from "./Table";
+import TableFilter from "./TableFilter";
 
 type TableHeaderProps<T, K extends keyof T> = {
   columns: Array<Column<T, K>>;
+  setFilterCommand: Dispatch<SetStateAction<string | null>>;
 };
 
 const TableHeader = <T, K extends keyof T>({
-  columns,
+  columns, setFilterCommand
 }: TableHeaderProps<T, K>): JSX.Element => {
+ 
+
   const headers = columns.map((col, index) => {
     return (
-        <th className="table-cell" key={`col-${index}`}>
-            {col.header}
-        </th>
-
-    ) 
+      <td key={`col-${index}`}>
+        <div className="table-head-col">{col.header}</div>
+        <TableFilter setFilterCommand={setFilterCommand} />
+      </td>
+    );
   });
 
-  return (
-    <TableHead>
-      <tr className="table-head-row">{headers}</tr>
-    </TableHead>
-  );
+  return <TableHead><tr>{headers}</tr></TableHead>;
 };
 
 export default TableHeader;

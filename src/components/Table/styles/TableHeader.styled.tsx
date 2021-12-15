@@ -1,12 +1,18 @@
 import styled from "styled-components"
 
 export const TableHead = styled.thead`
-    width: 100%;
-    border: solid 1px black;
-    display: flex;
-    flex: 1;
-  
-    
-    
+    .filter-selection{
+        float: right;
+        display:flex;
+        flex-direction: column;
+        &:hover{
+            cursor: pointer;
+        }
+    }
 
+    .table-head-col{
+        float: left;
+    }
+
+    
 `

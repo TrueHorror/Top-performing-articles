@@ -5,18 +5,60 @@ import { ArticleTableContainer } from "./styles/ArticleTableContainer.styled";
 import Table, { Column } from "./Table";
 import TableOperations from "./TableOperations/TableOperations";
 
-const ArticleTable = (props: {displayModal: boolean, setDisplayModal: Dispatch<SetStateAction<boolean>>}) => {
-  const [articles, setArticles] = useState<Article[] | null>(null);
+const ArticleTable = (props: {
+  displayModal: boolean;
+  setDisplayModal: Dispatch<SetStateAction<boolean>>;
+  updateList: boolean;
+  setUpdateList: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const [articles, setArticles] = useState<Article[] | null | undefined>(null);
+  const [unfilteredArticles, setUnfilteredArticles] = useState<
+    Article[] | null | undefined
+  >(articles);
+  const [filterCommand, setFilterCommand] = useState<string | null>(
+    "unselected"
+  );
 
   useEffect(() => {
-    //Get articles from server each time component renders
+    //Get articles from server each time component renders or list should be updated
     fetchArticles();
-  }, []);
+    if (props.updateList) {
+      console.log("updating setUpdateList to false");
+      props.setUpdateList(false);
+    }
+  }, [props.updateList]);
+
+  useEffect(() => {
+    console.log(filterCommand);
+
+    switch (filterCommand) {
+      case "unselected":
+        setArticles(unfilteredArticles);
+        break;
+      case "ascending":
+        filterListAsc();
+        break;
+      case "descending":
+        filterListDesc();
+        break;
+    }
+  }, [filterCommand]);
+
+  const filterListAsc = () => {
+    setArticles(articles?.sort((a, b) => a.title.localeCompare(b.title)));
+    //props.setUpdateList(true)
+  };
+
+  const filterListDesc = () => {
+    setArticles(articles?.sort((a, b) => b.title.localeCompare(a.title)));
+    //props.setUpdateList(true)
+  };
 
   const fetchArticles = async () => {
     const response = await fetch(Paths.Articles).then((res) => res.json());
 
     setArticles(response);
+    setUnfilteredArticles(response);
   };
 
   const columns: Column<Article, keyof Article>[] = [
@@ -65,9 +107,16 @@ const ArticleTable = (props: {displayModal: boolean, setDisplayModal: Dispatch<S
   return (
     <>
       <ArticleTableContainer>
-          <h2>Articles</h2>
-          <TableOperations displayModal={props.displayModal} setDisplayModal={props.setDisplayModal}/>
-        <Table data={articles} columns={columns} />
+        <h2>Articles</h2>
+        <TableOperations
+          displayModal={props.displayModal}
+          setDisplayModal={props.setDisplayModal}
+        />
+        <Table
+          data={articles}
+          columns={columns}
+          setFilterCommand={setFilterCommand}
+        />
       </ArticleTableContainer>
     </>
   );

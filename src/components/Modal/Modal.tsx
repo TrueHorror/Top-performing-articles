@@ -9,6 +9,7 @@ import ModalInputs from "./ModalInputs";
 const Modal = (props: {
   displayModal: boolean;
   setDisplayModal: Dispatch<SetStateAction<boolean>>;
+  setUpdateList: Dispatch<SetStateAction<boolean>>;
 }) => {
   return (
     <BackgroundShade>
@@ -24,6 +25,7 @@ const Modal = (props: {
           <ModalInputs
             displayModal={props.displayModal}
             setDisplayModal={props.setDisplayModal}
+            setUpdateList={props.setUpdateList}
           />
         </ModalBody>
       </ModalContainer>

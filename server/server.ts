@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/articles', (req, res) => res.json(articleList));
 
 app.post('/articles', (req, res) => {
-    console.log(req.body);
     
   if (!isArticle(req.body)) {
     res.status(422).json({message: 'Incorrect article format'})

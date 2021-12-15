@@ -6,13 +6,14 @@ import { useState } from "react";
 const MainPage = () => {
 
     const [displayModal, setDisplayModal] = useState<boolean>(false);
+    const [updateList, setUpdateList] = useState<boolean>(false);
 
     return(
         <>
         <MainContentWrapper>
-            <ArticleTable displayModal={displayModal} setDisplayModal={setDisplayModal}/>
+            <ArticleTable displayModal={displayModal} setDisplayModal={setDisplayModal} updateList={updateList} setUpdateList={setUpdateList}/>
         </MainContentWrapper>
-        {displayModal ? <Modal displayModal={displayModal} setDisplayModal={setDisplayModal}/>: null}
+        {displayModal ? <Modal displayModal={displayModal} setDisplayModal={setDisplayModal} setUpdateList={setUpdateList}/>: null}
         </>
     );
 }
